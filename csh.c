@@ -8,19 +8,21 @@
 #include <unistd.h>
 #include <assert.h>
 
-char workingDir[1000];
-char host[1000];
-char logged_in[1000];
+char retrUser[1024];
+char host[1024];
+char logged_in[1024];
 
 int main()
 {
     char *found, *start;
 
-    start = workingDir;
+    start = retrUser;
 
-    getcwd(workingDir,1000);
-    gethostname(host,1000);
+    getcwd(retrUser,1024);
+    gethostname(host,1024);
     
+    char pwd[1024] = "~";
+
     // printf("%s\n",start);
     int count = 0;
 
@@ -36,7 +38,17 @@ int main()
         count++;
     }
 
-    printf("%s@%s>%s\n",logged_in,host,workingDir);
+    while (1)
+    {
+        printf("%s@%s:%s>",logged_in,host,pwd);
+        
+        char input[10240],*tokens[1000] = {NULL};
+        
+        scanf("%s",input);
+
+        // parseInput(input,tokens," ");
+
+    }
 
     return 0;
 }
